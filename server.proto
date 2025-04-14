@@ -1,0 +1,21 @@
+// .proto file for defining the server service
+
+syntax = "proto3;"
+
+package server;
+
+service Server {
+    // Waiting to define
+    rpc Winrate (WinrateRequest) returns (WinrateReply) {}
+}
+
+
+// Waiting to define
+message WinrateRequest {
+    string champ_name = 1;
+}
+
+// Waiting to define
+message WinrateReply {
+    float winrate = 1;
+}
