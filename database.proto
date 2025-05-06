@@ -1,0 +1,19 @@
+// .proto file for defining the server service
+
+syntax = "proto3";
+package database;
+
+service Database {
+    // Return winrate for specified champion
+    rpc Winrate(WinrateRequest) returns (WinrateReply) {}
+}
+
+message WinrateRequest {
+    string champ_name = 1;
+    string version = 2;
+}
+
+message WinrateReply {
+    float winrate = 1;
+}
+
