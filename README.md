@@ -20,6 +20,7 @@ champion_name must be valid, else the system crashes.
 
 Testing is mostly through print statements, including bug testing and latency testing.
 E.g: 
-	`latency = time.time() - start_t
-        print(latency)
-        winrate = response.winrate`
+
+	latency = time.time() - start_t
+	print(latency)
+	winrate = response.winrate
