@@ -52,20 +52,20 @@ def get_winrate():
     if champ_name is None:
         return jsonify({"error": "Champion name is required"}), 400
     
-    #champ_info = cache.get(champ_name)
-    #if champ_info != -1:
+    champ_info = cache.get(champ_name)
+    if champ_info != -1:
         winrate = champ_info[1]
-    #else:
-    # communicate with database to get champion winrate
-    with grpc.insecure_channel(f"localhost:{8080}") as channel:
-        stub = database_pb2_grpc.DatabaseStub(channel)
-        start_t = time.time()
-        response = stub.Winrate(database_pb2.WinrateRequest(champ_name=champ_name, version="v2"))
-        latency = time.time() - start_t
-        print(latency)
-        winrate = response.winrate
-        # add champ, winrate to lru cach
-        #cache.add([champ_name, winrate])
+    else:
+        # communicate with database to get champion winrate
+        with grpc.insecure_channel(f"localhost:{8080}") as channel:
+            stub = database_pb2_grpc.DatabaseStub(channel)
+            start_t = time.time()
+            response = stub.Winrate(database_pb2.WinrateRequest(champ_name=champ_name, version="v2"))
+            latency = time.time() - start_t
+            print(latency)
+            winrate = response.winrate
+            # add champ, winrate to lru cach
+            cache.add([champ_name, winrate])
     
     #cache.print_content()
 
